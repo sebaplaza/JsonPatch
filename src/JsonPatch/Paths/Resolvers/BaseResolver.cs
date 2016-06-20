@@ -27,13 +27,14 @@ namespace JsonPatch.Paths.Resolvers
 
         public PathComponent ParsePathComponent(string component, Type rootEntityType, PathComponent previous = null)
         {
+            
             if (string.IsNullOrWhiteSpace(component))
             {
                 throw new JsonPatchParseException("Path component may not be empty.");
             }
 
             // If previous component was a dictionary then this component is a dictionary key
-            if (previous?.IsDictionary == true)
+            if (previous != null && previous.IsDictionary == true)
             {
                 return new DictionaryPathComponent(component)
                 {
